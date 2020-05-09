@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Westwind.AspNetCore.LiveReload;
+
 namespace DrinkRecipeSite {
     public class Startup {
         public Startup(IConfiguration configuration) {
@@ -19,7 +21,9 @@ namespace DrinkRecipeSite {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddRazorPages();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddMvc().AddRazorRuntimeCompilation();
+            services.AddLiveReload();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +37,8 @@ namespace DrinkRecipeSite {
             }
 
             app.UseHttpsRedirection();
+
+            app.UseLiveReload();
             app.UseStaticFiles();
 
             app.UseRouting();
