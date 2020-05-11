@@ -1,0 +1,27 @@
+﻿@page
+@model DrinkRecipeSite.RecipesModel
+@{
+    ViewData["Title"] = "Recipes";
+}
+
+<h1>Recipes</h1>
+
+<div class="row">
+        @foreach (var recipe in Model.Recipes) {
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@recipe.RecipeName</h5>
+                <p class="card-text">@recipe.RecipeDescription</p>
+                <ul>
+                    @foreach (var ingredients in recipe.Ingredients) {
+                        <li>
+                            <p>@ingredients.Name - @ingredients.Amount @ingredients.Unit</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    }
+</div>
